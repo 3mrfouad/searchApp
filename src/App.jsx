@@ -2,6 +2,7 @@ import './App.css'
 
 import React, { useEffect, useState } from 'react'
 
+import Alert from './components/Alert'
 import SearchInput from './components/SearchInput'
 import SearchResults from './components/SearchResults'
 
@@ -603,17 +604,19 @@ function App() {
 
   useEffect(() => {
     if (userInput) {
-      setResults(
-        data.filter(user =>
-          user.first_name.toLowerCase().includes(userInput.toLocaleLowerCase())
-        )
+      const searchResults = data.filter(user =>
+        user.first_name.toLowerCase().includes(userInput.toLocaleLowerCase())
       )
+      setResults(searchResults)
+    } else {
+      setResults([])
     }
   }, [userInput])
 
   return (
     <>
       <SearchInput userInput={userInput} setUserInput={setUserInput} />
+      {!!!results.length && <Alert />}
       <SearchResults results={results} />
     </>
   )

@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 
-function SearchInput({ userInput, setUserInput }) {
+import SearchContext from '../SearchContext/SearchContext'
+
+function SearchInput() {
+  const { userInput, setUserInput } = useContext(SearchContext)
+
   const handleOnChange = event => {
     setUserInput(event.target.value)
   }

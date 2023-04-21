@@ -1,14 +1,14 @@
 import './App.css'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import Alert from './components/Alert'
+import SearchContext from './components/SearchContext/SearchContext'
 import SearchInput from './components/SearchInput'
 import SearchResults from './components/SearchResults'
 
 function App() {
-  const [userInput, setUserInput] = useState('')
-  const [results, setResults] = useState([])
+  const { userInput, results, setResults } = useContext(SearchContext)
   const [data, setData] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -46,9 +46,9 @@ function App() {
     <div>Something went wrong</div>
   ) : (
     <>
-      <SearchInput userInput={userInput} setUserInput={setUserInput} />
+      <SearchInput />
       {!!!results.length && <Alert />}
-      <SearchResults results={results} />
+      <SearchResults />
     </>
   )
 }
